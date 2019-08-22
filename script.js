@@ -6,6 +6,7 @@ const output = document.querySelector("#output");
 button.addEventListener("click", function() {
     let rolls = [roll(6), roll(6)];
     let temp;
+    
     if (rolls[0] == rolls[1]) {
         temp = "It was a draw";
     } else if (rolls[0] > rolls[1]) {
