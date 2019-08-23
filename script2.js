@@ -1,20 +1,37 @@
 const button = document.querySelector("button");
 const output = document.querySelector(".output");
+const player1 = document.querySelector("#player1");
+const player2 = document.querySelector("#player2");
 const dice = [[5], [1,9], [1,5,9], [1,3,7,9], [1,3,5,7,9], [1,3,4,6,7,9]]; //position of the dots with 9 locations on a square face (3x3 locations)
 
 button.addEventListener("click", function() {
-    let rollDice = roll(6); //1-6
-    console.log(rollDice);
+    let rolls = [roll(6), roll(6)]; //1-6
+    let temp;
 
-    let holder = builder(rollDice); //builder(1-6)
-    console.log(output.children[0]);
-
-    if (output.children[0]) {
-        output.children[0].remove();
+    if (rolls[0] == rolls[1]) {
+        temp = "Draw";
+    } else if (rolls[0] > rolls[1]) {
+        temp = "Player 1 wins";
+    } else {
+        temp = "Player 2 wins";
     }
 
-    output.appendChild(holder);
+    updateOutput(player1, rolls[0]);
+    updateOutput(player2, rolls[1]);
+
+    output.innerHTML = temp; 
+    
 })
+
+function updateOutput(el, num) {
+    let holder = builder(num); //builder(1-6)
+  
+    if (el.children[0]) {
+        el.children[0].remove();
+    }
+
+    el.appendChild(holder);
+}
 
 function builder(num) {
     let div = document.createElement("div");
